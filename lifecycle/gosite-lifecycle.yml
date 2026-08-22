@@ -1,0 +1,95 @@
+generated: '2026-08-22'
+method: probed
+source: >-
+  Live probes of GoSite's published developer, status and support surfaces, 2026-08-22,
+  plus the Internet Archive record for developers.gosite.com.
+note: >-
+  This artifact records DECAY, which is the substantive finding for GoSite. The company
+  is active and its commercial site is maintained, but the developer surface it still
+  advertises has partially rotted: the Swagger reference host its own portal links to is
+  returning 502, and the singular-form developer host is decommissioned. NO StatusPage
+  and NO Deprecation pointer is emitted in apis.yml, because GoSite publishes neither —
+  see the soft-404 warning below.
+versioning:
+  scheme: null
+  published: false
+  current_version: null
+  note: No versioning scheme or version policy is published on any public surface.
+deprecation:
+  policy_published: false
+  sunset_header: null
+  deprecation_header: null
+  rfc8594: false
+  deprecated_operations: []
+  note: >-
+    No deprecation or sunset policy is published, and no machine-readable contract exists
+    from which deprecated operations could be derived.
+status_page:
+  published: false
+  url: null
+  note: >-
+    SOFT-404 WARNING. https://status.gosite.com/ returns HTTP 200, but the body is
+    GoSite's wildcard-subdomain catch-all reading "Website is no longer in service — if
+    you are the site owner, please contact help@gosite.com". It is NOT a status page. The
+    same 1,623-byte page is served by trust.gosite.com, security.gosite.com and
+    developer.gosite.com (singular). Any probe that trusts the status code alone will
+    credit GoSite with a status page, a trust center and a security page it does not
+    operate.
+sla:
+  published: false
+  url: null
+support:
+  channels:
+  - type: help-center
+    url: https://help.gosite.com/en/knowledge-base
+    status: 200
+  - type: chat
+    detail: 24/7 chat support advertised on gosite.com
+  - type: phone
+    detail: '+1 (858) 295-7995'
+  - type: email
+    detail: hello@gosite.com (general), help@gosite.com (site owner contact)
+surface_decay:
+- host: api.developers.gosite.com
+  role: >-
+    The Swagger API reference host. This is the ONLY API reference link GoSite's own
+    developer portal publishes ("View APIs" / step 3 of the access process).
+  status: 502
+  finding: >-
+    nginx 502 Bad Gateway on every path probed (/, /docs/, /docs, /openapi.json,
+    /openapi.yaml, /swagger.json, /v1/openapi.json, /api-docs, /redoc,
+    /docs/openapi.json, /docs/swagger.json, /swagger/v1/swagger.json). The upstream is
+    down, not merely unauthenticated. No snapshot of this host exists in the Internet
+    Archive, so the reference cannot be recovered from a mirror either.
+  first_observed: '2026-08-22'
+- host: developer.gosite.com
+  role: Singular-form developer host.
+  status: 200
+  finding: >-
+    Serves the "Website is no longer in service" wildcard catch-all — decommissioned.
+    The live developer portal is the PLURAL developers.gosite.com.
+  first_observed: '2026-08-22'
+- host: apps.gosite.com
+  role: App store / integrations directory linked from the developer portal footer.
+  status: 404
+  finding: >-
+    Returns GoSite's "404 Error - Page Not Found" template at the site root. The
+    integrations directory the portal points at is not being served.
+  first_observed: '2026-08-22'
+live_surfaces:
+- host: developers.gosite.com
+  status: 200
+  finding: >-
+    Developer portal renders and is current in structure, but the page footer carries a
+    "© 2022 GoSite, Inc." copyright and the API catalog still lists Sites, Placements,
+    Invoices and Emails as "Coming Soon" — the same state the Internet Archive recorded
+    in March 2023.
+- host: api.gosite.com
+  status: 401
+  finding: >-
+    A live, actively-served Spring application returning a current-timestamped JSON 401
+    envelope. The API tier itself is running; only its public documentation is not.
+changelog:
+  published: false
+  url: null
+  note: No API changelog or release notes are published.

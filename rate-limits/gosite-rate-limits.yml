@@ -1,0 +1,35 @@
+generated: '2026-08-22'
+method: searched
+source: https://developers.gosite.com/api-access
+limit_count: 0
+note: >-
+  GoSite publishes NO rate limits. The developer portal at developers.gosite.com markets
+  Business Growth and Business Management APIs and describes a three-step access process
+  (create a GoSite account, submit a request-access form, receive an API key on
+  approval), but it states no quota, no throttle, no burst allowance and no
+  rate-limit response headers. The only reference that could carry them is the Swagger
+  surface at https://api.developers.gosite.com/docs/, which returned HTTP 502 Bad Gateway
+  on every path probed on 2026-08-22, so nothing could be read from it. This is an honest
+  zero — limits may well be enforced and communicated privately to approved integrators,
+  but none are published where an integrator or an agent can read them before
+  integrating.
+limits: []
+response_headers:
+  documented: false
+  observed: []
+  note: >-
+    No rate-limit response headers are documented. None could be observed either: every
+    unauthenticated request to https://api.gosite.com/ returns a JSON 401 envelope with
+    no RateLimit-*, X-RateLimit-* or Retry-After header, and the documented API host
+    api.developers.gosite.com returns an nginx 502 error page.
+exhaustion_status_code: null
+evidence:
+- url: https://developers.gosite.com/api-access
+  status: 200
+  finding: Access process documented; no limits stated.
+- url: https://api.developers.gosite.com/docs/
+  status: 502
+  finding: Swagger reference host down; no limits readable.
+- url: https://api.gosite.com/
+  status: 401
+  finding: No rate-limit headers on the unauthenticated response.

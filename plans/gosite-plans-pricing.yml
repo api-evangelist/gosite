@@ -1,0 +1,71 @@
+generated: '2026-08-22'
+method: searched
+source: https://www.gosite.com/pricing
+note: >-
+  GoSite publishes product subscription pricing for the end-user platform, not for API
+  access. There is no developer/API plan, no metered API pricing and no free API tier
+  published anywhere on the site; API access is granted by approval rather than
+  purchased (see authentication/gosite-authentication.yml). Both published tiers route
+  to a "Let's Chat" sales contact rather than a self-serve checkout. The page advertises
+  "Save 25%" with annual billing but renders the annual figures client-side, so the
+  annual amounts are not recorded here rather than being guessed.
+currency: USD
+billing_periods:
+- monthly
+- annual
+plan_count: 2
+plans:
+- name: Go Online
+  price: 299
+  currency: USD
+  period: month
+  billing: monthly
+  self_serve: false
+  cta: Let's Chat
+  audience: Local owner operators
+  included:
+  - Professional, mobile-responsive done-for-you website
+  - Custom website domain if needed
+  - Website changes, updates and maintenance
+  - Listings on all major online directories
+  - Consistent business information synchronized across the web
+  annual_price: null
+  annual_note: >-
+    Annual pricing is advertised at "Save 25%" but the amount is rendered client-side
+    and was not present in the served HTML; not recorded rather than estimated.
+- name: Go Digital
+  price: 349
+  currency: USD
+  period: month
+  billing: monthly
+  self_serve: false
+  cta: Let's Chat
+  audience: Multi-crew service pros
+  includes_plan: Go Online
+  included:
+  - Everything in Go Online
+  - Online review generation and reputation management
+  - Unified Messenger inbox across Google, Facebook and web chat
+  - Online scheduling and appointment booking
+  - Mobile estimates and invoicing
+  - Digital and contactless payments
+  annual_price: null
+  annual_note: >-
+    Annual pricing is advertised at "Save 25%" but the amount is rendered client-side
+    and was not present in the served HTML; not recorded rather than estimated.
+trial:
+  offered: true
+  length_days: 14
+  tier: Ultimate
+  credit_card_required: false
+  cancellation: Switch or cancel at any time, no commitment
+included_across_all_plans:
+- 14-day free trial of Ultimate access, no credit card required
+- 24/7 support through chat, phone or email
+- iOS and Android mobile app
+- App store integrations
+api_pricing:
+  published: false
+  note: >-
+    No API pricing, quota, overage or developer tier is published. The developer portal
+    gates API access behind an approval form instead of a purchasable plan.

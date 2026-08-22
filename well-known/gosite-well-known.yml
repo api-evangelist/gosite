@@ -1,0 +1,136 @@
+generated: '2026-08-22'
+method: probed
+source: >-
+  Direct unauthenticated probes of /.well-known/* on every GoSite host reachable from
+  apis.yml and the developer portal, 2026-08-22.
+note: >-
+  Every probed path missed. NO WellKnown or SecurityTxt pointer is emitted in apis.yml,
+  because none of these hosts served a real document. Two false-positive shapes were
+  observed and are recorded as misses rather than hits: (1) cloud.gosite.com is a React
+  single-page app whose catch-all returns HTTP 200 with the app HTML shell for EVERY
+  /.well-known/* path, including paths that cannot exist; (2) api.gosite.com is an
+  authenticated Spring service that returns a JSON 401 envelope for every path. Neither
+  is a served well-known document.
+hosts:
+- host: api.gosite.com
+  note: >-
+    Live Spring-based API host on GoSite's own domain; every path returns a JSON 401
+    Unauthorized envelope, so no anonymous well-known document is retrievable.
+  documents:
+  - path: /.well-known/security.txt
+    status: 401
+    file: null
+  - path: /.well-known/openid-configuration
+    status: 401
+    file: null
+  - path: /.well-known/oauth-authorization-server
+    status: 401
+    file: null
+  - path: /.well-known/api-catalog
+    status: 401
+    file: null
+  - path: /.well-known/ai-plugin.json
+    status: 401
+    file: null
+  - path: /.well-known/agent-card.json
+    status: 401
+    file: null
+  - path: /.well-known/agent.json
+    status: 401
+    file: null
+- host: www.gosite.com
+  note: HubSpot-hosted marketing site; genuine 404 on every well-known path.
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+    file: null
+  - path: /.well-known/openid-configuration
+    status: 404
+    file: null
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+    file: null
+  - path: /.well-known/api-catalog
+    status: 404
+    file: null
+  - path: /.well-known/ai-plugin.json
+    status: 404
+    file: null
+  - path: /.well-known/agent-card.json
+    status: 404
+    file: null
+  - path: /.well-known/agent.json
+    status: 404
+    file: null
+- host: developers.gosite.com
+  note: Next.js developer portal; returns HTTP 500 for every well-known path.
+  documents:
+  - path: /.well-known/security.txt
+    status: 500
+    file: null
+  - path: /.well-known/openid-configuration
+    status: 500
+    file: null
+  - path: /.well-known/oauth-authorization-server
+    status: 500
+    file: null
+  - path: /.well-known/api-catalog
+    status: 500
+    file: null
+  - path: /.well-known/ai-plugin.json
+    status: 500
+    file: null
+  - path: /.well-known/agent-card.json
+    status: 500
+    file: null
+  - path: /.well-known/agent.json
+    status: 500
+    file: null
+- host: cloud.gosite.com
+  note: >-
+    SPA catch-all. Returns HTTP 200 with the application HTML shell for every path —
+    recorded as a MISS, not a hit, because no document is served.
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    file: null
+    result: miss-html-shell
+  - path: /.well-known/openid-configuration
+    status: 200
+    file: null
+    result: miss-html-shell
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    file: null
+    result: miss-html-shell
+  - path: /.well-known/api-catalog
+    status: 200
+    file: null
+    result: miss-html-shell
+  - path: /.well-known/ai-plugin.json
+    status: 200
+    file: null
+    result: miss-html-shell
+  - path: /.well-known/agent-card.json
+    status: 200
+    file: null
+    result: miss-html-shell
+  - path: /.well-known/agent.json
+    status: 200
+    file: null
+    result: miss-html-shell
+- host: apps.gosite.com
+  note: Marketing catch-all; serves the GoSite 404 page for every well-known path.
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+    file: null
+  - path: /.well-known/agent-card.json
+    status: 404
+    file: null
+  - path: /.well-known/agent.json
+    status: 404
+    file: null
+summary:
+  documents_served: 0
+  agent_card_found: false

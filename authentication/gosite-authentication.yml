@@ -1,0 +1,74 @@
+generated: '2026-08-22'
+method: searched
+source: https://developers.gosite.com/api-access
+note: >-
+  Derived from GoSite's own published access process, NOT from an OpenAPI document — no
+  machine-readable contract could be retrieved (the Swagger host
+  https://api.developers.gosite.com/docs/ returned HTTP 502 on every path on 2026-08-22).
+  GoSite's developer portal states the mechanism explicitly: "Once your request is
+  approved, we will provide an API Key that will let you make API calls." The key's
+  transport (header name, query parameter, or bearer form), its lifetime, rotation and
+  revocation are NOT published anywhere public, so they are recorded as unknown rather
+  than assumed.
+summary: >-
+  Approval-gated API key. No OAuth, no OpenID Connect, no public self-service credential
+  issuance, and no published scope model.
+schemes:
+- id: api_key
+  type: apiKey
+  name: null
+  in: null
+  documented: true
+  note: >-
+    An API key is issued to an approved requester. The parameter name and location are
+    not published; they would appear only in the gated Swagger reference.
+  source: https://developers.gosite.com/api-access
+issuance:
+  model: approval-gated
+  self_service: false
+  steps:
+  - order: 1
+    step: Create a GoSite customer account
+    detail: >-
+      "You'll need to create a new GoSite customer account to play with and test our
+      APIs" — an existing commercial relationship with GoSite is a precondition.
+  - order: 2
+    step: Submit the request-access form
+    detail: >-
+      "Fill out this form to request API access. This will take < 5 mins. Explain why you
+      want access to our APIs." The requester must justify the use case.
+  - order: 3
+    step: Receive an API key on approval
+    detail: >-
+      "Once approved, test out our Swagger APIs. Once your request is approved, we will
+      provide an API Key that will let you make API calls."
+  approval_required: true
+  turnaround_published: false
+oauth:
+  supported: false
+  note: >-
+    No OAuth 2.0 or OpenID Connect surface is published. The probes of
+    /.well-known/openid-configuration and /.well-known/oauth-authorization-server on
+    every GoSite host missed (see well-known/gosite-well-known.yml), so no
+    scopes/ artifact is emitted — there is no scope surface to describe.
+mtls:
+  supported: false
+  documented: false
+observed:
+- url: https://api.gosite.com/
+  status: 401
+  body: '{"timestamp":"...","status":401,"error":"Unauthorized","message":"","path":"/"}'
+  finding: >-
+    Live authenticated Spring service on GoSite's own domain. It rejects anonymous
+    requests with a JSON 401 envelope and returns NO WWW-Authenticate challenge, so the
+    expected credential form cannot be inferred from the response.
+- url: https://api.developers.gosite.com/docs/
+  status: 502
+  finding: >-
+    The Swagger reference named by GoSite's own developer portal is down; the
+    authentication section of the reference could not be read.
+gaps:
+- The API key header/parameter name is not published.
+- No key rotation, expiry or revocation policy is published.
+- No scope or permission model is published.
+- No public reference documents the authentication flow end to end.
