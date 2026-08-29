@@ -16,6 +16,17 @@ description: >-
   Swagger reference can be used. The company has raised roughly $60M from Left Lane
   Capital and Longley Capital and remains privately held and independently operated.
 url: https://raw.githubusercontent.com/api-evangelist/gosite/refs/heads/main/apis.yml
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 image: https://dufzo4epsnvlh.cloudfront.net/image/gosite_logo.png
 x-type: company
 x-source: harvest:secondary-market
